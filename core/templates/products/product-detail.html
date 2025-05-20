@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }} - GY</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Favicon -->
+    <!-- Custom styles -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .tab-button:hover {
+            border-bottom-color: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="h-screen bg-cover bg-center p-4 text-white" style="background-image: url('https://t3.ftcdn.net/jpg/02/55/92/44/360_F_255924443_xnmyQh2iHdQKfY5o16mkIVjzJu1t6QDt.jpg')"
+         x-data="{ activeTab: 'specs' }">
+        <div class="flex items-center gap-4 mb-4 h-6">
+            <div class="w-10 absolute left-[-1rem] h-6 bg-white"></div>
+            <a href="{% url 'category_products' category=category %}" class="text-xl ml-4 font-bold italic">{{ category|upper }}</a>
+            <div class="ml-auto text-2xl">🛒</div>
+        </div>
+      
+        <div class="font-bold text-lg">{{ product.name }}</div>
+        <div class="text-sm">{{ product.description|truncatechars:100 }}</div>
+      
+        <div class="mt-4 flex space-x-2">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="2 rounded object-cover" alt="{{ product.name }}" />
+            {% else %}
+            <div class="w-full h-48 bg-gray-700 rounded flex items-center justify-center">
+                <span class="text-gray-400">No image available</span>
+            </div>
+            {% endif %}
+        </div>
+      
+        <div class="mt-4 border-b border-white">
+            <div class="flex justify-around text-sm">
+                <button 
+                    @click="activeTab = 'specs'" 
+                    :class="{ 'border-b-2 border-white': activeTab === 'specs' }"
+                    class="pb-2 transition-all duration-200">Specs</button>
+                <button 
+                    @click="activeTab = 'photos'" 
+                    :class="{ 'border-b-2 border-white': activeTab === 'photos' }"
+                    class="pb-2 transition-all duration-200">Photos</button>
+                <button 
+                    @click="activeTab = 'details'" 
+                    :class="{ 'border-b-2 border-white': activeTab === 'details' }"
+                    class="pb-2 transition-all duration-200">Details</button>
+            </div>
+        </div>
+      
+        <!-- Tab Content -->
+        <div class="mt-4">
+            <div x-show="activeTab === 'specs'" class="space-y-4">
+                <div class="bg-black/20 rounded p-4">
+                    {% if category == 'led' %}
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Type</span>
+                                <span class="font-medium">{{ product.led_type }}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Pixel Pitch</span>
+                                <span class="font-medium">{{ product.pixel_pitch }}mm</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Brightness</span>
+                                <span class="font-medium">{{ product.brightness }} nits</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Panel Size</span>
+                                <span class="font-medium">{{ product.panel_size }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                    {% if category == 'stage' %}
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Type</span>
+                                <span class="font-medium">{{ product.stage_type }}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Dimensions</span>
+                                <span class="font-medium">{{ product.dimensions }}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Maximum Load</span>
+                                <span class="font-medium">{{ product.max_load }} kg</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Material</span>
+                                <span class="font-medium">{{ product.material }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if category == 'sound' %}
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Type</span>
+                                <span class="font-medium">{{ product.sound_type }}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Power Output</span>
+                                <span class="font-medium">{{ product.power_output }} watts</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Frequency Response</span>
+                                <span class="font-medium">{{ product.frequency_response }}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Connectivity</span>
+                                <span class="font-medium">{{ product.connectivity }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if category == 'lighting' %}
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Type</span>
+                                <span class="font-medium">{{ product.lighting_type }}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Wattage</span>
+                                <span class="font-medium">{{ product.wattage }} watts</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Beam Angle</span>
+                                <span class="font-medium">{{ product.beam_angle }}</span>
+                            </div>
+                        </div>
+                        {% if product.color_temperature %}
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Color Temperature</span>
+                                <span class="font-medium">{{ product.color_temperature }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% if category == 'accessories' %}
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Type</span>
+                                <span class="font-medium">{{ product.accessory_type }}</span>
+                            </div>
+                        </div>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Compatibility</span>
+                                <span class="font-medium">{{ product.compatibility }}</span>
+                            </div>
+                        </div>
+                        {% if product.dimensions %}
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Dimensions</span>
+                                <span class="font-medium">{{ product.dimensions }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% if product.weight %}
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Weight</span>
+                                <span class="font-medium">{{ product.weight }} kg</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    
+                    <div class="mt-4">
+                        <span class="text-gray-400">Price:</span>
+                        <span class="ml-2">${{ product.price }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <span class="text-gray-400">Stock:</span>
+                        <span class="ml-2">{{ product.stock }} units</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div x-show="activeTab === 'photos'" class="space-y-4">
+                <div class="grid grid-cols-2 gap-2">
+                    {% if product.image_gallery.all %}
+                        {% for image in product.image_gallery.all %}
+                        <img src="{{ image.image.url }}" class="aspect-square rounded object-cover" alt="{{ product.name }}" />
+                        {% endfor %}
+                    {% else %}
+                    <div class="aspect-square bg-black/20 rounded flex items-center justify-center">
+                        <span class="text-gray-400">No gallery images</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            
+            <div x-show="activeTab === 'details'" class="space-y-4">
+                <div class="bg-black/20 rounded p-4">
+                    <p class="text-sm leading-relaxed">
+                        {{ product.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+  

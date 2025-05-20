@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category }} - GY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .overflow-y-auto::-webkit-scrollbar {
+            width: 6px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .overflow-y-auto::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="h-screen bg-cover bg-center p-4 text-white" style="background-image: url('https://c4.wallpaperflare.com/wallpaper/246/739/689/digital-digital-art-artwork-illustration-abstract-hd-wallpaper-preview.jpg')">
+        <div class="flex items-center gap-4 mb-4 h-6">
+            <div class="w-10 absolute left-[-1rem] h-6 bg-white"></div>
+            <div class="text-xl ml-4 font-bold italic">{{ category }}</div>
+        </div>
+        
+        <div class="space-y-4 overflow-y-auto h-[calc(100vh-4rem)]">
+            {% for product in products %}
+            <a href="/{{ category_slug }}/{{ product.id }}" class="flex items-center space-x-4">
+                {% if product.image %}
+                <img src="{{ product.image.url }}" class="w-14 h-14 rounded-full border border-white object-cover" alt="{{ product.name }}" />
+                {% else %}
+                <div class="w-14 h-14 rounded-full border border-white bg-gray-700"></div>
+                {% endif %}
+                <div>
+                    <div class="font-semibold">{{ product.name }}</div>
+                    <div class="text-xs">{{ product.description|truncatechars:50 }}</div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

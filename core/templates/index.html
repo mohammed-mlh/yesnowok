@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GY - Votre événement, notre expertise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="relative h-screen bg-cover bg-center" style="background-image: url('https://img.freepik.com/free-photo/digital-art-inmersive-exhibition_23-2151428532.jpg?semt=ais_country_boost&w=740')">
+        <div class="absolute top-4 left-4 text-white font-bold">
+            <div class="text-3xl">GY 👑</div>
+            <div class="mt-2 text-3xl">
+                <p>Votre événement,</p>
+                <p>notre expertise,</p>
+                <p>un show inoubliable !</p>
+            </div>
+        </div>
+
+        <div class="absolute bottom-8 right-4 flex flex-col gap-2 items-center text-white font-semibold text-sm">
+            <a href="/led" class="flex flex-col items-center gap-1">
+                <img src="/static/images/leds.webp" class="w-12 h-12 rounded-full object-cover" alt="LED" />
+                <span>LED</span>
+            </a>
+            <a href="/stage" class="flex flex-col items-center gap-1">
+                <img src="/static/images/stands.jpg" class="w-12 h-12 rounded-full object-cover" alt="Stage" />
+                <span>Stage</span>
+            </a>
+            <a href="/sound" class="flex flex-col items-center gap-1">
+                <img src="/static/images/sounds.jpg" class="w-12 h-12 rounded-full object-cover" alt="Sound" />
+                <span>Sound</span>
+            </a>
+            <a href="/lighting" class="flex flex-col items-center gap-1">
+                <img src="/static/images/lighting.jpg" class="w-12 h-12 rounded-full object-cover" alt="Lighting" />
+                <span>Lighting</span>
+            </a>
+            <a href="/accessories" class="flex flex-col items-center gap-1">
+                <img src="/static/images/sounds.jpg" class="w-12 h-12 rounded-full object-cover" alt="Accessoire" />
+                <span>Acces.</span>
+            </a>
+        </div>
+
+        <div class="absolute bottom-8 left-4 space-y-4">
+            <img src="https://store-images.s-microsoft.com/image/apps.8453.13655054093851568.4a371b72-2ce8-4bdb-9d83-be49894d3fa0.7f3687b9-847d-4f86-bb5c-c73259e2b38e" class="w-10 h-10 object-cover" alt="WeChat" />
+            <img src="https://store-images.s-microsoft.com/image/apps.55245.13537716651231321.3067a421-6c2f-48a9-b77c-1e38e19146e6.10e2aa49-52ca-4e79-9a61-b6422978afb9" class="w-10 h-10 object-cover" alt="Telegram" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcHkfGrxRkBok7GAPVf_4tge5ujWEtb8rvqg&s" class="w-10 h-10 object-cover" alt="WhatsApp" />
+        </div>
+    </div>
+</body>
+</html>
+  
